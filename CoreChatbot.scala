@@ -63,6 +63,6 @@ object CoreChatBot{
                 else
                     s"I don't have any specific tips for  a $pet right now."
         
-            case None =>"that's a great question, but I need what kind of pet you have!\n " +
+            case None =>"that's a great question, but I need to know what kind of pet you have!\n " +
               "Is it a dog, cat, fish or bird?"
 }

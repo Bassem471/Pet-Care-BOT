@@ -32,4 +32,70 @@ object ConversationMemory{
                 similarity>=similarityPercent
 
         }
-}   
+    def extractTopics(history:List[InternalError]):List[Strign]=
+        history.map{
+            entry=>
+                entry.intentDetection match
+                    case Intent.Greeting=>"Greeting"
+                    case Intent.AskPetQuestion=>"Pet_question"
+                    case Intent.GetRecommendation=>"Recommendation"
+                    case Intent.UpdatePreference(prefType,_)=>prefType
+                    case Intent.Unknown=>"Unknown"
+        }.distinct
+
+    def summarizeConversation(history: List[InteractionEntry]):String=
+        if(history.isEmpty)
+            return "No conversation history available."
+        val totalInteractions=history.length
+        val petsMentioned=history.flatMap{
+            entry=>
+                val tokens=CoreChatBot.parseInput(entry.userInput)
+                tokens.filter(word=>List("dog","cat","fish","bird").contains(word))
+        }
+        val petCount=petsMentioned.groupBy(identity).view.mapValues(_.size).toMap
+        val petSummary=if(petCount.isEmpty)
+            "No specific pets mentioned."
+        else
+            petCount.map{case (pet,count)=> if(count==1)s"$pet"else s"$pet ($count times)"}.mkString(", ")
+
+        s" “We’ve discussed $totalInteractions topics. "+
+        s"You asked about: $petSummary."
+    def getMostDiscussedTopics(history:List[InteractionEntry]):List[(String,Int)]=
+        if(history.isEmpty)
+            return Nil
+        val allTopics=history.flatMap{
+            entry=>
+                val tokens=CoreChatBot.parseInput(entry.userInput)
+
+                tokens.filter(word=>List("dog","cat","fish","bird","diet","health","training","habitat","hygiene").contains(word))
+        }
+        val groupedTopics=allTopics.groupBy(identity)
+
+        val topicCounts=groupedTopics.view.mapValues(_.size)
+        val topicList=topicCoubt.toList
+        topicList.sortBy(_._2).reverse
+
+
+    def getUserMood(history:List[InteractionEntry]):String=
+        if(history.isEmpty)
+            return "Neutral"
+
+       val goodWords=List("great", "love", "good", "awesome", "thanks", "perfect", "excellent", "helpful", "amazing")
+       val badWords=List("boring", "bad", "hate", "terrible", "awful", "useless", "annoying", "frustrated", "disappointed")
+       
+       val (positiveCount,negativeCount)=history.foldLeft((0,0)){case ((posCount,negCount),entry)=>
+            val tokens=CoreChatBot.parseInput(entry.userInput)
+
+            val posWords=tokens.count(token=>goodWords.contains(token))
+            val negWords=tokens.count(token=>badWords.contains(token))
+            
+            (posCount+posWords,negCount+negWords)
+       }
+         if(positiveCount>negativeCount && positiveCount>0)
+                "Positive"
+          else if(negativeCount>positiveCount && negativeCount>0)
+                "Frustrated"
+          else
+                "Neutral"
+
+}
