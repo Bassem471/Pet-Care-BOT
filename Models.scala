@@ -21,7 +21,13 @@ case class InteractionEntry(
     intentDetection:Intent
 )
 
+case class  UserProfile(
+    userName:String="User",
+    petName:String="your Pet",
+    petType:String="None"
+)
 case class ConversationState(
-    history:List[InteractionEntry],
-    userPreferences:Map[String,String]
+    history:List[InteractionEntry]=Nil,
+    userPreferences:Map[String,String],
+    user:UserProfile=UserProfile()
 )

@@ -15,6 +15,8 @@ object Main{
             sys.exit(0)
         else
             val botResponse=CoreChatBot.handleUserInput(userInput)
+            println()
             println(s"Pet-Care-BOT: $botResponse")
+            StorageManager.saveInteraction(userInput,botResponse)
         chatLoop()
 }
