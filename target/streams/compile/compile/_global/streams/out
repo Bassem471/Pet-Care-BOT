@@ -1,7 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: C:\Users\games\Documents\Codes\Scala\sbt_proj\scala-3-project-template\src\main\scala\Pet-Care-BOT\StorageManager.scala:7:49 [0m[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m7 |[0m        [33mval[0m [36mtimeStamp[0m=LocalDateTime.now().format(formatter)[0m
-[0m[[0m[31merror[0m] [0m[0m[31m[31m  |[0m                                                 ^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m                                                 Not found: formatter[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m  |[0m longer explanation available when compiling with `-explain`[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
