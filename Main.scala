@@ -17,6 +17,5 @@ object Main{
             val botResponse=CoreChatBot.handleUserInput(userInput)
             println()
             println(s"Pet-Care-BOT: $botResponse")
-            StorageManager.saveInteraction(userInput,botResponse)
         chatLoop()
 }
