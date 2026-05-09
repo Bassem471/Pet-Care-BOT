@@ -4,6 +4,7 @@ object Intent{
     case object AskPetQuestion extends Intent
     case object GetRecommendation extends Intent
     case class UpdatePreference(preferenceType:String,value:String) extends Intent
+    case object GetSummary extends Intent 
     case object Unknown extends Intent
 }
 
